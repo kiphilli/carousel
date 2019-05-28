@@ -1,0 +1,58 @@
+<!--
+ - Created by Robert on 12/11/2017.
+ -->
+
+<aura:component description="Carousel_Frame">
+    <aura:attribute name="ci" type="Object"/>
+    <aura:attribute name="enableLightBox" type="String" default="false"/>
+    <aura:attribute name="ciIndex" type="Integer" default="0"/>
+    <aura:attribute name="imageHeight" type="String" default="initial"/>
+    <aura:attribute name="imageWidth" type="String" default="initial"/>
+    <aura:attribute name="captionLocation" type="String" default="below"/>
+    <aura:attribute name="captionAlign" type="String" default="center"/>
+    <aura:attribute name="innerDots" type="Boolean" default="false"/>
+    <div class="swiper-slide">
+        <aura:if isTrue="{!!v.ci.isVideo}">
+            <div class="slide-container">
+                <aura:if isTrue="{!v.enableLightBox}">
+                    <a href="{!v.ci.assetUrl}" data-lightbox="{!'image'+v.ciIndex}" data-title="{!v.ci.caption}">
+                        <img src="{!v.ci.assetUrl}" class="carousel-image"
+                             style="{!'height:' + v.imageHeight + ';width:' + v.imageWidth + ';'}"/>
+                        <aura:if isTrue="{!and(!empty(v.ci.caption),v.captionLocation=='overlay')}">
+                            <div class="{!if(v.innerDots, 'carousel-text-overlay inner-dots', 'carousel-text-overlay')}"
+                                 style="{!'max-width:' + v.imageWidth + ';text-align:' + v.captionAlign + ';'}">
+                                <aura:unescapedHtml value="{!v.ci.caption}"/>
+                            </div>
+                        </aura:if>
+                    </a>
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!!v.enableLightBox != 'true'}">
+                            <a href="{!v.ci.linkUrl}" target="_blank">
+                                <img src="{!v.ci.assetUrl}" class="carousel-image"
+                                     style="{!'height:' + v.imageHeight + ';width:' + v.imageWidth + ';'}"/>
+                                <aura:if isTrue="{!and(!empty(v.ci.caption),v.captionLocation=='overlay')}">
+                                    <div class="{!if(v.innerDots, 'carousel-text-overlay inner-dots', 'carousel-text-overlay')}"
+                                         style="{!'max-width:' + v.imageWidth + ';text-align:' + v.captionAlign + ';'}">
+                                        <aura:unescapedHtml value="{!v.ci.caption}"/>
+                                    </div>
+                                </aura:if>
+                            </a>
+                        </aura:if>
+                        <aura:if isTrue="{!and(!empty(v.ci.caption),v.captionLocation=='below')}">
+                            <div class="carousel-text"
+                                 style="{!'padding:10px;max-width:' + v.imageWidth + ';text-align:' + v.captionAlign + ';'}">
+                                <aura:unescapedHtml value="{!v.ci.caption}"/>
+                            </div>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>
+
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.ci.isVideo}">
+            <div class="video-container">
+                <aura:unescapedHtml value="{!v.ci.assetUrl}"/>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

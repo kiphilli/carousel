@@ -1,0 +1,35 @@
+<aura:component controller="TopicGroupListController" description="TopicGroupList" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute type="Id" name="topicId" description="Topic record for groups" />
+    <aura:attribute name="groups" type="CollaborationGroup[]" />
+    <aura:attribute name="groupsLoaded" type="Boolean" default="false" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <lightning:notificationsLibrary aura:id="notificationLib"/>
+    
+    <lightning:card title="Topic Groups">
+
+        <div class="{! v.groupsLoaded ? 'slds-p-horizontal_small' : 'slds-p-horizontal_small slds-hidden' }">
+            <aura:if isTrue="{! !empty(v.groups) }">
+                <ul class="slds-list--vertical">
+                    <aura:iteration items="{! v.groups}" var="group">
+
+                        <li class="slds-item slds-p-vertical_small group" onclick="{! c.navigateToRecord}" data-id="{! group.Id}">
+                            <lightning:tile label="{! group.Name }">
+                                <aura:set attribute="media">
+                                    <img class="group_thumb" src="{! group.SmallPhotoUrl }" alt="" />
+                                </aura:set>
+                                <p>{! group.Description }</p>
+
+                            </lightning:tile>
+                        </li>
+                    </aura:iteration>
+                </ul>
+
+                <aura:set attribute="else">
+                    <p>No groups for this topic.</p>
+                </aura:set>
+
+            </aura:if>
+        </div>
+
+    </lightning:card>
+</aura:component>

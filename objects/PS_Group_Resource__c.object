@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Caption__c</fullName>
+        <externalId>false</externalId>
+        <label>Caption</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Carousel_Caption__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The header can be no more than 150 characters (including spaces)</inlineHelpText>
+        <label>Header</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Carousel_Description__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The sub-header can be no more than 250 characters (including spaces)</inlineHelpText>
+        <label>Sub-Header</label>
+        <length>250</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Embed_Video__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Embed Video</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Excluded_Profiles__c</fullName>
+        <externalId>false</externalId>
+        <label>Excluded Profiles</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>PS Knowledge Base Manager</fullName>
+                    <default>false</default>
+                    <label>PS Knowledge Base Manager</label>
+                </value>
+                <value>
+                    <fullName>PS Community Member</fullName>
+                    <default>false</default>
+                    <label>PS Community Member</label>
+                </value>
+                <value>
+                    <fullName>PS Community Moderator</fullName>
+                    <default>false</default>
+                    <label>PS Community Moderator</label>
+                </value>
+                <value>
+                    <fullName>PS Community Moderator Super User</fullName>
+                    <default>false</default>
+                    <label>PS Community Moderator Super User</label>
+                </value>
+                <value>
+                    <fullName>PS User</fullName>
+                    <default>false</default>
+                    <label>PS User</label>
+                </value>
+                <value>
+                    <fullName>PS Community Login User</fullName>
+                    <default>false</default>
+                    <label>PS Community Login User</label>
+                </value>
+                <value>
+                    <fullName>PS System Administrator</fullName>
+                    <default>false</default>
+                    <label>PS System Administrator</label>
+                </value>
+                <value>
+                    <fullName>Partner Community User</fullName>
+                    <default>false</default>
+                    <label>Partner Community User</label>
+                </value>
+                <value>
+                    <fullName>PS Partner Community Moderator Super User</fullName>
+                    <default>false</default>
+                    <label>PS Partner Community Moderator Super User</label>
+                </value>
+                <value>
+                    <fullName>Solution Manager</fullName>
+                    <default>false</default>
+                    <label>Solution Manager</label>
+                </value>
+                <value>
+                    <fullName>Solution Network Intermediaries</fullName>
+                    <default>false</default>
+                    <label>Solution Network Intermediaries</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Expiration_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Expiration Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>External_URL__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>URL must start with http://. If this a Video the url must be an EMBEDDED video link.</inlineHelpText>
+        <label>External URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Feature_Carousel_Sort_Order__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The lower the value the earlier the slide shows up in the carousel</inlineHelpText>
+        <label>Sort Order</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Expired__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( 
+AND(!ISNULL(Expiration_Date__c),!ISNULL(Start_Date__c)), OR(TODAY() &gt; Expiration_Date__c, TODAY() &lt; Start_Date__c),
+IF( AND(ISNULL(Expiration_Date__c),!ISNULL(Start_Date__c)), TODAY() &lt; Start_Date__c,
+IF( AND(!ISNULL(Expiration_Date__c),ISNULL(Start_Date__c)), TODAY() &gt; Expiration_Date__c,
+IF( AND(ISNULL(Expiration_Date__c),ISNULL(Start_Date__c)), false, false) 
+)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Expired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PS_Group__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>PS Group Record</label>
+        <referenceTo>PS_Group__c</referenceTo>
+        <relationshipLabel>Group Resources</relationshipLabel>
+        <relationshipName>PS_Group_Resources</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Resource_Grouping_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Resource Grouping Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Slider_Url_c__c</fullName>
+        <externalId>false</externalId>
+        <label>Slider Url</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>When a resource should start being shown on the community.</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Carousel Photo</fullName>
+                    <default>false</default>
+                    <label>Carousel Photo</label>
+                </value>
+                <value>
+                    <fullName>Feature Carousel</fullName>
+                    <default>false</default>
+                    <label>Feature Carousel</label>
+                </value>
+                <value>
+                    <fullName>Video Carousel</fullName>
+                    <default>false</default>
+                    <label>Video Carousel</label>
+                </value>
+                <value>
+                    <fullName>Resource</fullName>
+                    <default>false</default>
+                    <label>Resource</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Video_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Video Flag</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>PS Group Resource</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <columns>Carousel_Caption__c</columns>
+        <columns>Caption__c</columns>
+        <columns>Type__c</columns>
+        <columns>Carousel_Description__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0000}</displayFormat>
+        <label>Record Number</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>PS Group Resources</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Expiration_Dates_are_valid</fullName>
+        <active>true</active>
+        <description>Start Date cannot be after the Expiration Date.</description>
+        <errorConditionFormula>Start_Date__c &gt; Expiration_Date__c</errorConditionFormula>
+        <errorMessage>Start Date cannot be after Expiration Date.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

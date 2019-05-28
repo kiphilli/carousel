@@ -1,0 +1,122 @@
+<!--
+ - Created by robert.truitt@slalom.com on 2/22/2017.
+ -->
+
+<aura:component description="Custom File Listing tied to record Id" controller="BMGF_Resource_Controller"
+                implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+
+    <ltng:require styles="{!join(',',  $Resource.fontawesome + '/font-awesome-4.7.0/css/font-awesome.min.css', $Resource.BMGF_PS_Assets + '/styles/lightbox.min.css')}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="Title" type="String" default="Resources"/>
+    <aura:attribute name="recordId" type="String" default=""/>
+    <aura:attribute name="parentObjectName" type="String" default=""/>
+    <aura:attribute name="childObjectName" type="String" default=""/>
+    <aura:attribute name="junctionObjectName" type="String" default=""/>
+    <aura:attribute name="parentRelationField" type="String" default=""/>
+    <aura:attribute name="childRelationField" type="String" default=""/>
+    <aura:attribute name="parentSearchExpr" type="String"/>
+    <aura:attribute name="childSearchExpr" type="String"/>
+    <aura:attribute name="junctionSearchExpr" type="String"/>
+    <aura:attribute name="photoVideoUrlField" type="String"/>
+    <aura:attribute name="descriptionField" type="String" default=""/>
+    <aura:attribute name="groupByFields" type="String" default=""/>
+    <aura:attribute name="orderBy" type="String"/>
+    <aura:attribute name="callBackEmptyResources" type="Aura.Action"/>
+    <aura:attribute name="callBackNotEmptyResources" type="Aura.Action"/>
+    <aura:attribute name="resourceList" type="BMGF_Resource_Controller.ResourceRecord[]"/>
+    <aura:attribute name="resourceListSize" type="Integer" default="0"/>
+    <aura:attribute name="isGroupPage" type="String" default="false"/>
+    <aura:attribute name="groupNameField" type="String" default="Name"/>
+    <aura:attribute name="isPhotoDisplay" type="String" default="false"/>
+    <aura:attribute name="currentGroup" type="String"/>
+    <aura:attribute name="editButtonLabel" type="String" default="Edit" />
+    <aura:attribute name="userProfile" type="String" />
+
+    <!-- carousel edit button -->
+    <aura:attribute name="canEdit" type="Boolean" default="false" description="Does current user have edit rights for the carousel" />
+    <aura:attribute name="recordIdList" type="List" description="List of carousel slide ids" />
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="carouselType" type="String" />
+    <aura:attribute name="originId" type="String" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <!-- \carousel edit button -->
+
+    <div class="slds-is-relative">
+        <!-- carousel edit button -->
+        <lightning:spinner
+                alternativeText="Loading"
+                aura:id="spinner"
+                class="slds-hidden"
+                size="large"
+        />
+        <aura:if isTrue="{!and(v.resourceList!=null, v.resourceListSize>0)}">
+            <div class="slds-box">
+                <aura:if isTrue="{!v.canEdit}" >
+                    <div class="slds-hidden" aura:id="editButton">
+                        <lightning:button iconName="utility:edit" variant="brand" onclick="{!c.editResource}" label="{! v.editButtonLabel}" class="edit-button_abs" />
+                    </div>
+
+                </aura:if>
+
+                <div class="small_section_header">
+                    Resources
+                </div>
+                <aura:iteration items="{!v.resourceList}" var="rsrs" indexVar="rsrsIndex">
+                    <aura:if isTrue="{!rsrs.isNewGroup}">
+                        <aura:iteration items="{!rsrs.groupByValues}" var="gn" indexVar="headerIndex">
+                            <aura:if isTrue="{!and(headerIndex==rsrs.newGroupIndex, headerIndex==0)}">
+                                <div class="small_section_subhead_1">
+                                    {!gn}
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!and(headerIndex>=rsrs.newGroupIndex, headerIndex>0)}">
+                                <div class="small_section_subhead_2">
+                                    {!gn}
+                                </div>
+                            </aura:if>
+                        </aura:iteration>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!!v.isPhotoDisplay}">
+                                <hr class="line_small_margin"/>
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{!v.isPhotoDisplay}">
+                        <aura:if isTrue="{!rsrs.isPhoto}">
+                            <a href="{!rsrs.fileUrl}" data-lightbox="{!'image'+rsrsIndex}"
+                               data-title="{!rsrs.fileDescription}">
+                                <img style="width:100%;" src="{!rsrs.fileUrl}" alt="{!rsrs.fileDescription}"
+                                     title="{!rsrs.fileDescription}"/>
+                            </a>
+
+                        </aura:if>
+                        <aura:set attribute="else">
+                            <div class="resource_item">
+                                <i class="{!'small_resource_icon fa ' + rsrs.fontAwesomeIcon}"
+                                   style="display:inline-block; padding-right:10px; color:#000; font-size:15px;"/>
+                                <div class="resource_link_desc">
+                                    <ui:outputURL value="{!rsrs.fileUrl}" target="_blank"
+                                                  label="{!rsrs.fileDescription!=null?rsrs.fileDescription:'No Display Name Defined'}"/>
+                                </div>
+                            </div>
+                        </aura:set>
+                    </aura:if>
+                </aura:iteration>
+            </div>
+
+            <aura:set attribute="else">
+                <aura:if isTrue="{!v.canEdit}">
+                    <div class="slds-grid slds-grid_align-start slds-p-around--medium slds-box">
+                        <div class="slds-hidden" aura:id="editButton">
+                            <lightning:button iconName="utility:edit" variant="brand" onclick="{!c.editResource}" label="{! v.editButtonLabel}" />
+                        </div>
+                    </div>
+                </aura:if>
+            </aura:set>
+
+        </aura:if>
+
+
+    </div>
+</aura:component>

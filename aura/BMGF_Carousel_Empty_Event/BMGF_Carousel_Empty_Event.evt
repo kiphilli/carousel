@@ -1,0 +1,7 @@
+<!--
+ - Created by robert.truitt on 2/15/2017.
+ -->
+
+<aura:event type="COMPONENT" description="BMGF_Carousel_Empty_Event">
+    <aura:attribute name="isCarouselEmpty" type="Boolean"/>
+</aura:event>

@@ -1,0 +1,9 @@
+<!--
+ - Created by Robert on 1/2/2018.
+ -->
+
+<design:component >
+    <design:attribute name="parentSearchSpec" default="Id != null"/>
+    <design:attribute name="searchSpec"
+                      default="Type__c='Feature Carousel' and (Expiration_Date__c > today or Expiration_Date__c = null)"/>
+</design:component>

@@ -1,0 +1,122 @@
+<!--
+ - Created by Robert on 12/11/2017.
+ -->
+
+<aura:component description="Carousel" implements="forceCommunity:availableForAllPageTypes"
+                controller="BMGF_Carousel_Controller">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.doRender}"/>
+    <ltng:require styles="{!join(',', $Resource.Carousel_Assets + '/swiper.min.css', $Resource.Carousel_Assets + '/lightbox.min.css',
+                    $Resource.fontawesome + '/font-awesome-4.7.0/css/font-awesome.min.css')}"
+                  scripts="{!join(',', $Resource.Carousel_Assets + '/swiper.min.js', $Resource.Carousel_Assets + '/lightbox-plus-jquery.min.js')}"
+                  afterScriptsLoaded="{!c.doInitJS}"/>
+    <aura:attribute name="carouselType" type="String" />
+    <aura:attribute name="originId" type="String" />
+    <aura:attribute name="carouselObj" type="Object"/>
+    <aura:attribute name="carouselItems" type="List"/>
+    <aura:attribute name="recordId" type="String" default=""/>
+    <aura:attribute name="jsLoaded" type="Boolean" default="false"/>
+    <aura:attribute name="slidesLoaded" type="Boolean" default="false"/>
+    <aura:attribute name="slickLoaded" type="Boolean" default="false"/>
+
+    <aura:attribute name="imageHeight" type="String" default="initial"/>
+    <aura:attribute name="imageWidth" type="String" default="initial"/>
+    <aura:attribute name="arrowLocation" type="String" default="inner"/>
+    <aura:attribute name="CustomType" type="String" default=""/>
+    <aura:attribute name="slidesToShow" type="Integer" default="1"/>
+    <aura:attribute name="slidesToScroll" type="Integer" default="1"/>
+    <aura:attribute name="noPadding" type="String" default="false"/>
+    <aura:attribute name="parentObjectName" type="String" default=""/>
+    <aura:attribute name="linkField" type="String" default="Id"/>
+    <aura:attribute name="childObjectName" type="String" default=""/>
+    <aura:attribute name="junctionObjectName" type="String" default=""/>
+    <aura:attribute name="parentRelationField" type="String" default=""/>
+    <aura:attribute name="childRelationField" type="String" default=""/>
+    <aura:attribute name="junctionSearchExpr" type="String" default=""/>
+    <aura:attribute name="imageField" type="String" default=""/>
+    <aura:attribute name="parentSearchExpr" type="String"/>
+    <aura:attribute name="childSearchExpr" type="String"/>
+    <aura:attribute name="captionField" type="String" default=""/>
+    <aura:attribute name="captionLocation" type="String" default="below"/>
+    <aura:attribute name="captionAlign" type="String" default="center"/>
+    <aura:attribute name="showDots" type="String" default="true"/>
+    <aura:attribute name="comUrlPrefix" type="String"/>
+    <aura:attribute name="Title" type="String" default=""/>
+    <aura:attribute name="errorMessage" type="String" default=""/>
+    <aura:attribute name="responsiveSettings" type="Object"/>
+    <aura:attribute name="orderBy" type="String"/>
+    <aura:attribute name="maxItems" type="Integer"/>
+    <aura:attribute name="isGroupPage" type="String" default="false"/>
+    <aura:attribute name="groupNameField" type="String" default="Name"/>
+    <aura:attribute name="callBackEmptyCarousel" type="Aura.Action"/>
+    <aura:attribute name="callBackNotEmptyCarousel" type="Aura.Action"/>
+    <aura:attribute name="enableLightBox" type="String" default="false"/>
+    <aura:attribute name="autoPlayInterval" type="Integer" default=""/>
+    <aura:attribute name="numberOfItems" type="Integer" default="0" access="private"/>
+    <aura:attribute name="isVideoField" type="String" default=""/>
+    <aura:attribute name="isEmbeddedField" type="String" default=""/>
+    <aura:attribute name="swipeCarouselLoaded" type="Boolean" default="false"/>
+    <aura:attribute name="editButtonLabel" type="String" default="Edit" />
+
+    <!-- carousel edit button -->
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="canEdit" type="Boolean" default="false" description="Does current user have edit rights for the carousel" />
+    <aura:attribute name="recordIdList" type="List" description="List of carousel slide ids" />
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <!-- \carousel edit button -->
+
+    <aura:registerEvent name="emptyCarousel" type="c:BMGF_Carousel_Empty_Event"/>
+
+    <div class="slds-is-relative" onmouseenter="{! c.handleMouseEnter }" onmouseleave="{! c.handleMouseLeave }">
+        <!-- carousel edit button -->
+        <lightning:spinner
+                alternativeText="Loading"
+                aura:id="spinner"
+                class="slds-hidden"
+                size="large"
+        />
+
+        <aura:if isTrue="{!!empty(v.carouselItems)}">
+            <aura:if isTrue="{!v.canEdit}" >
+                <div class="" aura:id="editButton">
+                    <lightning:button iconName="utility:edit" variant="brand" onclick="{!c.editCarousel}" label="{! v.editButtonLabel}" class="edit-button_abs" />
+                </div>
+            </aura:if>
+
+            <div aura:id="carouselContainer" class="swiper-container" id="foobar">
+                <div class="swiper-wrapper">
+                    <aura:iteration items="{!v.carouselItems}" var="ci" indexVar="ciIndex">
+                        <c:Carousel_Frame ci="{!ci}" ciIndex="{!ciIndex}" enableLightBox="{!v.enableLightBox}"
+                                          captionLocation="{!v.captionLocation}" imageHeight="{!v.imageHeight}"
+                                          imageWidth="{!v.imageWidth}" captionAlign="{!v.captionAlign}"
+                                          innerDots="{!and(v.arrowLocation=='inner', v.showDots)}"/>
+                    </aura:iteration>
+                </div>
+                <aura:if isTrue="{!and(v.carouselItems.length>1,v.arrowLocation=='inner')}">
+                    <div aura:id="navDots" class="swiper-pagination dots-overlay"></div>
+                    <div aura:id="nextBtn" class="swiper-button-next"></div>
+                    <div aura:id="prevBtn" class="swiper-button-prev"></div>
+                </aura:if>
+            </div>
+            <aura:if isTrue="{!and(v.carouselItems.length>1,v.arrowLocation!='inner')}">
+                <div class="nav-container-below">
+                    <div aura:id="navDots" class="swiper-pagination swiper-pagination-below"></div>
+                    <div aura:id="nextBtn" class="swiper-button-next next-below"></div>
+                    <div aura:id="prevBtn" class="swiper-button-prev prev-below"></div>
+                </div>
+            </aura:if>
+
+            <aura:set attribute="else">
+                <aura:if isTrue="{!v.canEdit}" >
+                    <div class="slds-p-around--medium slds-grid slds-grid_align-start slds-box">
+                        <div class="slds-hidden" aura:id="editButton">
+                            <lightning:button iconName="utility:edit" variant="brand" onclick="{!c.editCarousel}" label="{! v.editButtonLabel}" />
+                        </div>
+                    </div>
+                </aura:if>
+            </aura:set>
+
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,88 @@
+/**
+ * Created by robert.truitt on 2/15/2017.
+ */
+
+.THIS .edit-button_abs {
+    display: none;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 10;
+}
+
+.THIS:hover .edit-button_abs {
+    display: block;
+}
+
+.THIS .small_section_header {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.25rem;
+    color: inherit;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.THIS .small_section_subhead_1 {
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1rem;
+    color: inherit;
+    text-align: left;
+    margin: 15px 0;
+}
+.THIS .small_section_subhead_2 {
+    font-weight: bold;
+    font-style: normal;
+    font-size: 11px;
+    color: #97231f;
+    text-align: left;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+.THIS .resource_item {
+    display: block;
+    position: relative;
+}
+.THIS .small_resource_icon {
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+.THIS .line_small_margin {
+    display: block;
+    margin: 10px 0;
+    border-top: 1px solid #d4d4d4;
+    height: 1px;
+}
+.THIS .resource_link_desc {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 24px;
+    padding-bottom: 5px;
+}
+.THIS .resource_link_desc a {
+    color: rgb(140, 183, 199);
+}
+.THIS .small_light_gray_text {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: #8D8E8A;
+    text-align: left;
+    margin-left: 24px;
+}
+.THIS.card {
+    background-color: #FFF;
+    padding: 25px;
+}
+.THIS.hide_component {
+    display: none;
+}
+
+.THIS .lb-data .lb-close {
+  position: absolute;
+  top: -50px;
+  margin-right: -50px;
+}

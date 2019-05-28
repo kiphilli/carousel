@@ -1,0 +1,39 @@
+<!--
+ - Created by robert.truitt on 3/1/2017.
+ -->
+
+<design:component >
+    <design:attribute name="Title" default="Resources"/>
+    <design:attribute name="recordId" default="{!recordId}"/>
+    <design:attribute name="parentObjectName" description="Parent object that drives selection, such as Account"
+                      default="Giving_Pledge_Events__c"/>
+    <design:attribute name="childObjectName" description="Object that holds the resources"
+                      default="GP_Community_Resource__c"/>
+    <design:attribute name="junctionObjectName" description="Junction object if there is one"
+                      default="Resource__c"/>
+    <design:attribute name="parentRelationField"
+                      description="Parent Relationship Field Name on Child or Junction" default="Event__c"/>
+    <design:attribute name="childRelationField"
+                      description="Child Relationship Field Name on Junction if utilizing one" default="Resource__c"/>
+    <design:attribute name="parentSearchExpr"
+                      description="Search Expression for Parent component"/>
+    <design:attribute name="childSearchExpr"
+                      description="Search Expression for Child photo component or Files"/>
+    <design:attribute name="junctionSearchExpr"
+                      description="Search Expression for Junction component"/>
+    <design:attribute name="photoVideoUrlField"
+                      description="photo Video field for external links. Use parentObjectName.field or childObjectName.field or junctionObjectName.field"
+                      default=""/>
+    <design:attribute name="descriptionField"
+                      description="description field if not File Description field. Use parentObjectName.field or childObjectName.field or junctionObjectName.field"
+                      default=""/>
+    <design:attribute name="groupByFields"
+                      description="Fields to group by. Use parentObjectName.field or childObjectName.field"
+                      default=""/>
+    <design:attribute name="orderBy" default=""/>
+    <design:attribute name="isGroupPage" description="is this component on a group page" datasource="true, false"
+                    default="false"/>
+    <design:attribute name="groupNameField" description="Group Name Field" default="Name"/>
+    <design:attribute name="isPhotoDisplay" description="is this component displaying only photos" datasource="true, false"
+                      default="false"/>
+</design:component>

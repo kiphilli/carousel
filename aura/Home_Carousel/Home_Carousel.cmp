@@ -1,0 +1,19 @@
+<!--
+ - Created by Robert on 1/2/2018.
+ -->
+
+<aura:component description="Home_Carousel" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="parentSearchSpec" type="String" default=""/>
+    <aura:attribute name="searchSpec" type="String" default=""/>
+    <aura:attribute name="orderBy" type="String" default="Feature_Carousel_Sort_Order__c" />
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="originId" type="String" />
+    <aura:attribute name="canEdit" type="Boolean" default="false" description="Does current user have edit rights for the carousel" />
+    
+    <c:Carousel parentObjectName="PS_Group__c" childObjectName="PS_Group_Resource__c"
+                childSearchExpr="{!v.searchSpec}" parentSearchExpr="{!v.parentSearchSpec}" orderBy="{!v.orderBy}"
+                junctionObjectName="" parentRelationField="PS_Group__c" childRelationField=""
+                linkField="PS_Group_Resource__c.External_Url__c" captionField="PS_Group_Resource__c.Carousel_Caption__c,PS_Group_Resource__c.Carousel_Description__c"
+                captionLocation="overlay" captionAlign="center" arrowLocation="inner" showDots="true"
+                imageHeight="350px" imageWidth="100%" autoPlayInterval="5000" canEdit="{! v.canEdit }" carouselType="Default" psGroupId="{! v.psGroupId }" originId="{! v.originId }"/>
+</aura:component>

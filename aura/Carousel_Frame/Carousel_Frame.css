@@ -1,0 +1,25 @@
+/**
+ * Created by Robert on 12/11/2017.
+ */
+.THIS {
+}
+
+.THIS .slide-container {
+	width: 100%;
+	height: 100%;
+}
+
+.THIS .video-container {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+    width: 100%;
+}
+
+.THIS .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

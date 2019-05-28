@@ -1,0 +1,49 @@
+<aura:component description="BMGF_PS_Carousel_Container" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" controller="BMGF_Resource_Container_Controller">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- carousel attributes -->
+    <aura:attribute name="carouselType" type="String" default="Default" />
+    <aura:attribute name="Title" type="String" default=""/>
+    <aura:attribute name="parentObjectName" type="String" default=""/>
+    <aura:attribute name="childObjectName" type="String" default=""/>
+    <aura:attribute name="junctionObjectName" type="String" default=""/>
+    <aura:attribute name="parentRelationField" type="String" default=""/>
+    <aura:attribute name="childRelationField" type="String" default=""/>
+    <aura:attribute name="linkField" type="String" default="Id"/>
+    <aura:attribute name="imageField" type="String" default=""/>
+    <aura:attribute name="orderBy" type="String"/>
+    <aura:attribute name="parentSearchExpr" type="String"/>
+    <aura:attribute name="childSearchExpr" type="String"/>
+    <aura:attribute name="junctionSearchExpr" type="String" default=""/>
+    <aura:attribute name="captionField" type="String" default=""/>
+    <aura:attribute name="captionLocation" type="String" default="below"/>
+    <aura:attribute name="captionAlign" type="String" default="center"/>
+    <aura:attribute name="arrowLocation" type="String" default="inner"/>
+    <aura:attribute name="slidesToShow" type="Integer" default="1"/>
+    <aura:attribute name="slidesToScroll" type="Integer" default="1"/>
+    <aura:attribute name="noPadding" type="String" default="false"/>
+    <aura:attribute name="showDots" type="String" default="true"/>
+    <aura:attribute name="imageHeight" type="String" default="initial"/>
+    <aura:attribute name="imageWidth" type="String" default="initial"/>
+    <aura:attribute name="isGroupPage" type="String" default="false"/>
+    <aura:attribute name="groupNameField" type="String" default="Name"/>
+    <aura:attribute name="enableLightBox" type="String" default="false"/>
+    <aura:attribute name="autoPlayInterval" type="Integer" default=""/>
+    <aura:attribute name="isVideoField" type="String" default=""/>
+    <aura:attribute name="isEmbeddedField" type="String" default=""/>
+    <aura:attribute name="editButtonLabel" type="String" default="Edit" />
+
+    <aura:attribute name="photoVideoUrlField" type="String"/>
+    <aura:attribute name="descriptionField" type="String" default=""/>
+    <aura:attribute name="groupByFields" type="String" default=""/>
+    <aura:attribute name="isPhotoDisplay" type="String" default="false"/>
+
+    <!-- CMS edit -->
+    <aura:attribute name="editProfiles" type="String" default="" />
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="canEdit" type="Boolean" default="false" description="Does current user have edit rights for the carousel" />
+    <aura:registerEvent name="postMessage" type="c:BMGF_evtPostMessage"/>
+    <aura:handler event="c:BMGF_evtComponentRefresh" action="{!c.handleRefresh}"/>
+    <!-- \CMS edit -->
+
+    {!v.body}
+</aura:component>

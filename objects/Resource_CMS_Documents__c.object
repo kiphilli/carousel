@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>All document links that need to be used by the Resource CMS functionality.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Image_Optimization__c</fullName>
+        <externalId>false</externalId>
+        <label>Image Optimization</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Video_Embed__c</fullName>
+        <externalId>false</externalId>
+        <label>Video Embed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <label>Resource CMS Documents</label>
+    <visibility>Public</visibility>
+</CustomObject>

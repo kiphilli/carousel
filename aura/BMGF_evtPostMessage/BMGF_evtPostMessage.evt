@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="BMGF_evtPostMessage">
+    <aura:attribute name="title" type="String" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="type" type="String" default="other" />
+    <aura:attribute name="mode" type="String" default="sticky" />
+    <aura:attribute name="duration" type="Integer" default="5000" />
+</aura:event>

@@ -1,0 +1,10 @@
+/* improve vertical alignment of tooltop icons. This might need to be removed in future releases if Salesforce fixes the positioning */
+.THIS .form-element .slds-form-element__icon {
+    position: relative;
+    top: -1px;
+}
+
+.THIS.IE11 .slds-dropdown,
+.THIS.IE11Mobile .slds-dropdown {
+    position: static !important;
+}

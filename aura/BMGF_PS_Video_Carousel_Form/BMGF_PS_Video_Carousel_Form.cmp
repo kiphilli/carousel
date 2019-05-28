@@ -1,0 +1,90 @@
+<aura:component description="BMGF_PS_Video_Carousel_Form" controller="BMGF_PS_Carousel_Edit_Controller">
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="resourceRecord" type="PS_Group_Resource__c" />
+    <aura:attribute name="videoEmbedDocUrl" type="String" />
+    <aura:attribute name="saveButtonLabel" type="String" default="Save" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.doRender}"/>
+    <aura:registerEvent name="postMessage" type="c:BMGF_evtPostMessage"/>
+    <aura:registerEvent name="cmpMessage" type="c:evtCmpMessage"/>
+
+    <div>
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">Header</span>
+            <lightning:helptext content="The header can be no more than 150 characters (including spaces)" class="slds-form-element__icon slds-m-left--xxx-small" />
+            <lightning:input
+                    class="form-element"
+                    label="Header"
+                    placeholder="Enter header here"
+                    type="text"
+                    value="{! v.resourceRecord.Carousel_Caption__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">Start Date</span>
+            <lightning:helptext content="The date the content will become active. Takes affect 12:00AM of the date selected." />
+            <lightning:input
+                    class="form-element"
+                    label="Start Date"
+                    type="date"
+                    value="{! v.resourceRecord.Start_Date__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">Expiration Date</span>
+            <lightning:helptext content="The date the content will stop being active. Takes effect 12:00AM the day after the selected date." />
+            <lightning:input
+                    class="form-element"
+                    label="Expiration Date"
+                    type="date"
+                    value="{! v.resourceRecord.Expiration_Date__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">External URL</span>
+            <lightning:helptext content="URL must start with http://" class="slds-form-element__icon slds-m-left--xxx-small" />
+            <lightning:input
+                    class="form-element"
+                    label="External URL"
+                    type="text"
+                    value="{! v.resourceRecord.External_URL__c }"
+                    variant="label-hidden"
+            />
+            <span class="slds-text-body&#45;&#45;small">Links to videos can only be used from Vimeo and YouTube and must be an embedded link. See the following document for directions to obtain the embedded link from YouTube and Vimeo videos: <a href="{! v.videoEmbedDocUrl }" target="_blank" tabindex="-1">Video Embed document</a>.</span>
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">Sort Order</span>
+            <lightning:helptext content="The lower the value the earlier the slide shows up in the carousel" class="slds-form-element__icon slds-m-left--xxx-small" />
+            <lightning:input
+                    class="form-element"
+                    label="Sort Order"
+                    type="number"
+                    value="{! v.resourceRecord.Feature_Carousel_Sort_Order__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-grid slds-grid_align-start slds-p-bottom--small slds-p-top--xxx-small">
+            <lightning:button
+                    label="Cancel"
+                    onclick="{! c.returnToList }"
+                    variant="neutral"
+            />
+
+            <lightning:button
+                    label="{! v.saveButtonLabel }"
+                    onclick="{! c.handleSubmit }"
+                    type="submit"
+                    variant="brand"
+            />
+        </div>
+    </div>
+</aura:component>

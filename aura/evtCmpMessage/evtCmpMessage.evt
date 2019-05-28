@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="evtCmpMessage">
+    <aura:attribute name="id" type="String" />
+    <aura:attribute name="body" type="String" />
+</aura:event>

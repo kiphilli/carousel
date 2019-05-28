@@ -1,0 +1,130 @@
+<aura:component description="BMGF_PS_Carousel_Edit" controller="BMGF_PS_Carousel_Edit_Controller">
+    <aura:attribute name="carouselType" type="String" />
+    <aura:attribute name="originId" type="String" />
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="recordIdList" type="List" description="List of carousel slide ids" />
+    <aura:attribute name="rawData" type="Object" />
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="isEditing" type="Boolean" default="false" />
+    <aura:attribute name="editImage" type="Boolean" default="true" />
+    <aura:attribute name="editFields" type="Boolean" default="true" />
+    <aura:attribute name="rowToDelete" type="Object" />
+    <aura:attribute name="rowIndex" type="Integer" />
+    <aura:attribute name="currentRecord" type="PS_Group_Resource__c"/>
+    <aura:attribute name="recordId" type="Id" default="{!v.currentRecord.Id}" />
+    <aura:attribute name="currentRecordImageUrl" type="String" />
+    <aura:attribute name="uploadedFileId" type="String" />
+    <aura:attribute name="uploadedFileName" type="String" />
+    <aura:attribute name="uploadDocumentUrl" type="String" />
+    <aura:attribute name="overlay" type="Aura.Action" />
+    <aura:attribute name="recordFormComponent" type="Aura.Component" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:evtMessage" action="{!c.handlePromptMessage}"/>
+    <aura:handler name="cmpMessage" event="c:evtCmpMessage" action="{! c.handleMessage }"/>
+    <aura:registerEvent name="postMessage" type="c:BMGF_evtPostMessage"/>
+    <aura:registerEvent name="recordRefresh" type="c:BMGF_evtComponentRefresh"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+    <aura:if isTrue="{!v.isEditing}">
+        <div class="slds-is-relative">
+            <lightning:spinner
+                    alternativeText="Loading"
+                    aura:id="spinner"
+                    class="slds-hidden"
+                    size="large"
+            />
+
+            <aura:if isTrue="{! true == v.editImage }">
+                <div class="slds-m-bottom--x-large">
+                    <div class="slds-p-bottom--medium">
+                        <aura:if isTrue="{! 'Resource' == v.carouselType }">
+
+                            <h4 class="slds-text-heading_small slds-m-bottom--small">File upload instructions</h4>
+                            <ul class="list slds-m-bottom--medium">
+                                <li>File size should be less than 25mb</li>
+                            </ul>
+
+                            <aura:set attribute="else">
+                                <h4 class="slds-text-heading_small slds-m-bottom--small">Image upload instructions</h4>
+                                <ul class="list slds-m-bottom--medium">
+                                    <li>File size should be less than 1mb</li>
+                                    <li>Image Dimensions for the Feature Carousel should be: 800px x 400px</li>
+                                    <li>Image Dimensions for the Photo Carousel should be: 800px x 534px</li>
+                                </ul>
+                                <p>For more information see the <a href="{!v.uploadDocumentUrl}" target="_blank" tabindex="-1">Image Optimization document</a>.</p>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+
+                    <aura:if isTrue="{! 'Resource' == v.carouselType }">
+                        <aura:if isTrue="{! null != v.currentRecordImageUrl }">
+                            <a href="{! v.currentRecordImageUrl }">Resource File</a>
+                        </aura:if>
+                        <div>
+                            <lightning:fileUpload
+                                    label="File"
+                                    name="carouselImg"
+                                    recordId="{! v.recordId }"
+                                    onuploadfinished="{!c.handleUploadFinished}"
+                            />
+                        </div>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{! null != v.currentRecordImageUrl }">
+                                <img src="{! v.currentRecordImageUrl }" />
+                            </aura:if>
+                            <div>
+                                <lightning:fileUpload
+                                        accept=".jpg, .png"
+                                        label="Photo"
+                                        name="carouselImg"
+                                        recordId="{! v.recordId }"
+                                        onuploadfinished="{!c.handleUploadFinished}"
+                                />
+                            </div>
+
+                        </aura:set>
+
+                    </aura:if>
+                    <span class="slds-text-body_small">{!v.uploadedFileName}</span>
+                </div>
+
+                <aura:if isTrue="{! false == v.editFields }">
+                    <aura:if isTrue="{! 'Resource' == v.carouselType }">
+                        <lightning:button label="Done" variant="brand" onclick="{! c.finalizeInsert }" />
+
+                        <aura:set attribute="else">
+                            <lightning:button label="Done" variant="brand" onclick="{! c.finalizeInsert }" disabled="{! null == v.currentRecordImageUrl }" />
+                        </aura:set>
+
+                    </aura:if>
+
+                </aura:if>
+            </aura:if>
+
+            <aura:if isTrue="{! true == v.editFields }">
+                {! v.recordFormComponent }
+            </aura:if>
+
+        </div>
+
+        <aura:set attribute="else">
+            <lightning:layout horizontalAlign="end">
+                <lightning:layoutItem class="slds-m-bottom_medium">
+                    <lightning:button label="New" variant="brand" onclick="{! c.handleNew }" />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <div style="height: 300px">
+                <lightning:datatable
+                    columns = "{! v.columns }"
+                    data = "{! v.data }"
+                    hideCheckboxColumn = "true"
+                    keyField = "Id"
+                    onrowaction = "{! c.handleRowAction }"
+                    resizeColumnDisabled = "true"
+                />
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

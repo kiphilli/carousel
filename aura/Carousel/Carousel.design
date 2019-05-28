@@ -1,0 +1,53 @@
+<!--
+ - Created by robert.truitt on 2/13/2017.
+ -->
+
+<design:component >
+    <design:attribute name="recordId" description="Record Id, leave blank for all" default="{!recordId}"/>
+    <design:attribute name="Title" description="Title" default=""/>
+    <design:attribute name="parentObjectName" description="Parent object that drives selection, such as Account"
+                      default="PS_Group__c"/>
+    <design:attribute name="childObjectName" description="Object that holds the photos"
+                      default="PS_Group_Resource__c"/>
+    <design:attribute name="junctionObjectName" description="Junction object if there is one"
+                      default=""/>
+    <design:attribute name="parentRelationField"
+                      description="Parent Relationship Field Name on Child or Junction" default="PS_Group__c"/>
+    <design:attribute name="childRelationField"
+                      description="Child Relationship Field Name on Junction if utilizing one" default=""/>
+    <design:attribute name="linkField" description="field with url or Id" default="PS_Group_Resource__c.External_Url__c"/>
+    <design:attribute name="imageField" description="Rich Text Field that holds image if not using files"
+                      default=""/>
+    <design:attribute name="orderBy"
+                      description="Order by ex: Name desc"/>
+    <design:attribute name="parentSearchExpr"
+                      description="Search Expression for Parent component"/>
+    <design:attribute name="childSearchExpr"
+                      description="Search Expression for Child photo component or Files"/>
+    <design:attribute name="junctionSearchExpr"
+                      description="Search Expression for Junction Object"/>
+    <design:attribute name="captionField"
+                      description="caption field Use parentObjectName.field or childObjectName.field"
+                      default="PS_Group_Resource__c.Caption__c"/>
+    <design:attribute name="captionLocation" description="Location of caption"
+                      datasource="below, overlay, lightbox only"
+                      default="below"/>
+    <design:attribute name="captionAlign" dataSource="right, center, left" default="center"/>
+    <design:attribute name="arrowLocation" dataSource="inner, outer, under, none" default="inner"/>
+    <design:attribute name="slidesToShow" default="1"/>
+    <design:attribute name="slidesToScroll" default="1"/>
+    <design:attribute name="noPadding" dataSource="true, false" default="false"/>
+    <design:attribute name="showDots" dataSource="true, false" default="true"/>
+    <design:attribute name="imageHeight" description="image height put css value. 100%, 250px etc" default="100%"/>
+    <design:attribute name="imageWidth" description="image width put css value. 100%, 250px etc" default="100%"/>
+    <design:attribute name="isGroupPage" description="is this carousel on a group page" datasource="true, false"
+                      default="false"/>
+    <design:attribute name="groupNameField" description="Group Name Field" default="Name"/>
+    <design:attribute name="enableLightBox" description="enable lightbox on images instead of link to object"
+                      datasource="true, false"
+                      default="false"/>
+    <design:attribute name="autoPlayInterval" description="interval for carousel(in milliseconds) if on autoplay"/>
+    <design:attribute name="isVideoField" description="Field for video boolean flag"/>
+    <design:attribute name="isEmbeddedField" description="Is Embedded Video Field" default=""/>
+    <design:attribute name="editButtonLabel" description="Edit button label" default="Edit" />
+</design:component>

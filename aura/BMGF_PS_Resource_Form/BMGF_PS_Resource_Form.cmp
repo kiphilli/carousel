@@ -1,0 +1,72 @@
+<aura:component description="BMGF_PS_Resource_Form" controller="BMGF_PS_Carousel_Edit_Controller">
+    <aura:attribute name="psGroupId" type="Id" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="resourceRecord" type="PS_Group_Resource__c" />
+    <aura:attribute name="saveButtonLabel" type="String" default="Save" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.doRender}"/>
+    <aura:registerEvent name="postMessage" type="c:BMGF_evtPostMessage"/>
+    <aura:registerEvent name="cmpMessage" type="c:evtCmpMessage"/>
+
+    <div>
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">Description</span>
+            <lightning:helptext content="The description can be no more than 255 characters (including spaces)" class="slds-form-element__icon slds-m-left--xxx-small" />
+            <lightning:input
+                    class="form-element"
+                    label="Description"
+                    type="text"
+                    value="{! v.resourceRecord.Description__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">External URL</span>
+            <lightning:helptext content="URL must start with http://" class="slds-form-element__icon slds-m-left--xxx-small" />
+            <lightning:input
+                    class="form-element"
+                    label="External URL"
+                    type="text"
+                    value="{! v.resourceRecord.External_URL__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <lightning:input
+                    class="form-element"
+                    label="Grouping Name"
+                    type="text"
+                    value="{! v.resourceRecord.Resource_Grouping_Name__c }"
+            />
+        </div>
+
+        <div class="slds-m-bottom_small form-element">
+            <span class="slds-form-element__label">Sort Order</span>
+            <lightning:helptext content="The lower the value the earlier the slide shows up in the carousel" class="slds-form-element__icon slds-m-left--xxx-small" />
+            <lightning:input
+                    class="form-element"
+                    label="Sort Order"
+                    type="number"
+                    value="{! v.resourceRecord.Feature_Carousel_Sort_Order__c }"
+                    variant="label-hidden"
+            />
+        </div>
+
+        <div class="slds-grid slds-grid_align-start slds-p-bottom--small slds-p-top--xxx-small">
+            <lightning:button
+                    label="Cancel"
+                    onclick="{! c.returnToList }"
+                    variant="neutral"
+            />
+
+            <lightning:button
+                    label="{! v.saveButtonLabel }"
+                    onclick="{! c.handleSubmit }"
+                    type="submit"
+                    variant="brand"
+            />
+        </div>
+    </div>
+</aura:component>
